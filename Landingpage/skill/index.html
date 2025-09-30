@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Matrix</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --font-primary: "Brut Grotesque Boook", sans-serif;
+            --font-secondary: 'Hmalphamono', 'Roboto Mono', monospace;
+            --accent-color: #00bbff;
+            --background-color: #000000;
+            --text-color: #ffffff;
+            --border-color: rgba(255, 255, 255, 0.2);
+            --text-muted-color: rgba(255, 255, 255, 0.6);
+            --progress-bg-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 6rem auto;
+            padding: 2rem;
+            opacity: 0;
+            animation: fade-in-content 1s forwards .5s;
+        }
+
+        .main-title {
+            font-family: var(--font-secondary);
+            font-size: 2.5rem;
+            text-align: center;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            margin-bottom: 4rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 kolom */
+            gap: 2.5rem;
+        }
+
+        .skill-item {
+            /* Animasi agar muncul satu per satu */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fade-in-up 0.8s forwards;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            font-family: var(--font-secondary);
+        }
+        
+        .skill-name {
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .skill-percentage {
+            font-size: 1rem;
+            color: var(--accent-color);
+        }
+
+        .progress-bar-container {
+            background-color: var(--progress-bg-color);
+            height: 8px;
+            width: 100%;
+        }
+
+        .progress-bar {
+            background-color: var(--accent-color);
+            height: 100%;
+            width: var(--progress, 0%); /* Nilai default 0% */
+            box-shadow: 0 0 10px var(--accent-color);
+            transform-origin: left;
+            animation: fill-bar 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        
+        /* --- HUD NAVIGATION --- */
+        .page-header, .page-footer {
+            position: fixed; width: 100%; padding: 1.5rem;
+            display: flex; justify-content: space-between; align-items: center;
+            pointer-events: none;
+        }
+        .page-header { top: 0; left: 0; }
+        .page-footer { bottom: 0; left: 0; }
+        .hud-nav-link {
+            font-family: var(--font-secondary); font-size: 1rem; color: var(--text-muted-color);
+            text-decoration: none; text-transform: uppercase; letter-spacing: 2px;
+            padding: 10px; position: relative; transition: color 0.3s;
+            pointer-events: all; opacity: 0;
+            animation: fade-in-content 1s forwards .2s;
+        }
+        .hud-nav-link:hover { color: var(--accent-color); }
+        .hud-nav-link::before {
+            content: ''; position: absolute; width: 20px; height: 20px;
+            border-color: var(--accent-color); border-style: solid;
+            transition: transform 0.3s ease;
+        }
+        .hud-nav-link.top-left::before { top: 0; left: 0; border-width: 2px 0 0 2px; }
+        .hud-nav-link.top-right::before { top: 0; right: 0; border-width: 2px 2px 0 0; }
+        .hud-nav-link.bottom-left::before { bottom: 0; left: 0; border-width: 0 0 2px 2px; }
+        .hud-nav-link.bottom-right::before { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
+        .hud-nav-link:hover::before { transform: scale(1.2); }
+        
+        /* --- ANIMATIONS --- */
+        @keyframes fade-in-content { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fade-in-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fill-bar {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+        
+        /* Staggered animation delay untuk setiap skill */
+        .skill-item:nth-child(1) { animation-delay: 0.6s; }
+        .skill-item:nth-child(2) { animation-delay: 0.7s; }
+        .skill-item:nth-child(3) { animation-delay: 0.8s; }
+        .skill-item:nth-child(4) { animation-delay: 0.9s; }
+        .skill-item:nth-child(5) { animation-delay: 1.0s; }
+        .skill-item:nth-child(6) { animation-delay: 1.1s; }
+        .skill-item:nth-child(7) { animation-delay: 1.2s; }
+        .skill-item:nth-child(8) { animation-delay: 1.3s; }
+
+        /* Responsif untuk layar kecil */
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr; /* Kolom jadi 1 di mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="page-header">
+        <a href="../index.html" class="hud-nav-link top-left">[ Back ]</a>
+        <a class="hud-nav-link top-right"></a>
+    </header>
+
+    <main class="main-container">
+        <h1 class="main-title">[ Skill ]</h1>
+
+        <div class="skills-grid">
+
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">Python</span>
+                    <span class="skill-percentage">60%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="--progress: 60%;"></div>
+                </div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">HTML</span>
+                    <span class="skill-percentage">95%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="--progress: 95%;"></div>
+                </div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">CSS</span>
+                    <span class="skill-percentage">90%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="--progress: 90%;"></div>
+                </div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">JavaScript</span>
+                    <span class="skill-percentage">80%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="--progress: 80%;"></div>
+                </div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">React</span>
+                    <span class="skill-percentage">10%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="--progress: 10%;"></div>
+                </div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">Next.js</span>
+                    <span class="skill-percentage">15%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="--progress: 15%;"></div>
+                </div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">Figma</span>
+                    <span class="skill-percentage">60%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="--progress: 60%;"></div>
+                </div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">Prompting</span>
+                    <span class="skill-percentage">98%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="--progress: 98%;"></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <a class="hud-nav-link bottom-left"></a>
+        <a class="hud-nav-link bottom-right"></a>
+    </footer>
+
+</body>
+</html>
