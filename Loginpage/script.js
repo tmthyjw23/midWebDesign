@@ -17,11 +17,23 @@ document.addEventListener('DOMContentLoaded', function() {
         
         currentUser = usernameValue;
         localStorage.setItem('user', usernameValue);
-        window.location.href = '../Landingpage/index.html';
+         // TAMPILKAN SWEETALERT DI SINI
+        Swal.fire({
+            icon: 'success',
+            title: 'Login Berhasil!',
+            text: 'Selamat datang, ' + usernameValue,
+            timer: 5000, // Notifikasi hilang setelah 2 detik
+            showConfirmButton: true,
+            background: '#000',
+            color: '#fff'
+        }).then(() => {
+            // PINDAHKAN KODE PINDAH HALAMAN KE DALAM .then()
+            window.location.href = '../Landingpage/index.html';
+        });
     });
 });
 
-// Export function
+// Export function di tingkat atas
 export function getUser() {
     return localStorage.getItem('user'); // Ambil dari localStorage
 }

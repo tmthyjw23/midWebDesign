@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About This Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --font-primary: "Brut Grotesque Boook", sans-serif;
+            --font-secondary: 'Hmalphamono', 'Roboto Mono', monospace;
+            --accent-color: #00bbff;
+            --background-color: #000000;
+            --text-color: #ffffff;
+            --border-color: rgba(255, 255, 255, 0.2);
+            --text-muted-color: rgba(255, 255, 255, 0.7);
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 6rem auto;
+            padding: 2rem;
+            opacity: 0;
+            animation: fade-in-content 1s forwards .5s;
+        }
+
+        .main-title {
+            font-family: var(--font-secondary);
+            font-size: 2.5rem;
+            text-align: center;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            margin-bottom: 4rem;
+        }
+
+        .about-content h2 {
+            font-family: var(--font-secondary);
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            letter-spacing: 2px;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .about-content p, .about-content ul {
+            font-size: 1.1rem;
+            color: var(--text-muted-color);
+            line-height: 1.7;
+            text-align: left;
+        }
+
+        .tech-stack-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .tech-stack-list li {
+            font-family: var(--font-secondary);
+            margin-bottom: 0.5rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        /* Membuat custom bullet point '>' */
+        .tech-stack-list li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* --- HUD NAVIGATION --- */
+        .page-header, .page-footer {
+            position: fixed; width: 100%; padding: 1.5rem;
+            display: flex; justify-content: space-between; align-items: center;
+            pointer-events: none;
+        }
+        .page-header { top: 0; left: 0; }
+        .page-footer { bottom: 0; left: 0; }
+        .hud-nav-link {
+            font-family: var(--font-secondary); font-size: 1rem; color: var(--text-muted-color);
+            text-decoration: none; text-transform: uppercase; letter-spacing: 2px;
+            padding: 10px; position: relative; transition: color 0.3s;
+            pointer-events: all; opacity: 0;
+            animation: fade-in-content 1s forwards .2s;
+        }
+        .hud-nav-link:hover { color: var(--accent-color); }
+        .hud-nav-link::before {
+            content: ''; position: absolute; width: 20px; height: 20px;
+            border-color: var(--accent-color); border-style: solid;
+            transition: transform 0.3s ease;
+        }
+        .hud-nav-link.top-left::before { top: 0; left: 0; border-width: 2px 0 0 2px; }
+        .hud-nav-link.top-right::before { top: 0; right: 0; border-width: 2px 2px 0 0; }
+        .hud-nav-link.bottom-left::before { bottom: 0; left: 0; border-width: 0 0 2px 2px; }
+        .hud-nav-link.bottom-right::before { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
+        .hud-nav-link:hover::before { transform: scale(1.2); }
+        
+        @keyframes fade-in-content { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+    
+    <header class="page-header">
+        <a href="../index.html" class="hud-nav-link top-left">[ Home ]</a>
+        <a  class="hud-nav-link top-right"></a>
+    </header>
+
+    <main class="main-container">
+        <h1 class="main-title">[ Project Log ]</h1>
+
+        <div class="about-content">
+            <h2>// MISSION OBJECTIVE</h2>
+            <p>
+                Project ini bukan hanya project mid Web design saya saja, tetapi juga sebagai latihan saya untuk membuat Website yang mencakup sedikit UI/UX dan juga prompting AI. Saya terinspirasi dari sebuah website yang saya lihat dari cssAwards yang bernama "Ledger". Yang dimana temanya kebanyakan warna putih dan hitam dan juga kotak, lalu ada seperti HUD yang membuat tampilannya menjadi unik dan keren. Project ini dibangun sebagai Project untuk mata kuliah Desain Web yang dibimbing oleh Sir Regi Najoan. Tujuannya adalah untuk tidak hanya menambah sebuah portofolio, tetapi juga untuk mengeksplorasi bagaimana sebuah tema visual yang kuat dapat diterapkan secara konsisten di berbagai halaman untuk menciptakan pengalaman pengguna yang imersif.
+            </p>
+
+            <h2>// SYSTEM SPECS</h2>
+            <ul class="tech-stack-list">
+                <li>Core: HTML5, CSS3, JavaScript (ES6)</li>
+                <li>Framework: Bootstrap 5</li>
+                <li>Storage: LocalStorage API</li>
+                <li>Assets: Google Fonts, SweetAlert2</li>
+                <li>AI: Google Gemini, Deepseek, ChatGPT</li>
+            </ul>
+
+            <h2>// DEVELOPMENT LOG</h2>
+            <p>
+                Proyek ini berevolusi dari satu halaman login menjadi sebuah situs mini yang fungsional. Fokus utama adalah pada konsistensi komponen UI, mulai dari navigasi HUD, tombol, hingga formulir, untuk memastikan setiap interaksi terasa familiar bagi pengguna di seluruh situs.
+            </p>
+
+            <h2>// ACKNOWLEDGMENTS</h2>
+            <p>
+                Terima kasih sudah menikmati project ini.
+            </p>
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <a  class="hud-nav-link bottom-left"></a>
+        <a class="hud-nav-link bottom-right"></a>
+    </footer>
+
+</body>
+</html>

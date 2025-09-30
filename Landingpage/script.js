@@ -11,9 +11,9 @@
         if (savedUsername) {
             // Jika ada, tambahkan nama ke dalam teks h1
             // textContent lebih aman untuk hanya menampilkan teks
-            welcomeHeading.textContent += ' ' + savedUsername;
+            welcomeHeading.textContent += '' + savedUsername;
         } else {
             // Opsional: Jika user langsung ke halaman ini tanpa login
-            welcomeHeading.textContent += ' Guest';
+            welcomeHeading.textContent += 'Saudara';
         }
     });
