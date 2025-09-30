@@ -1,0 +1,103 @@
+        :root {
+            --font-primary: "Brut Grotesque Boook", sans-serif;
+            --font-secondary: 'Hmalphamono', 'Roboto Mono', monospace;
+            --accent-color: #00bbff;
+            --background-color: #000000;
+            --text-color: #ffffff;
+            --border-color: rgba(255, 255, 255, 0.4);
+            --text-muted-color: rgba(255, 255, 255, 0.5);
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            padding: 1rem;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            position: relative;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 450px;
+        }
+
+        /* --- SCREEN HUD & ANIMATION --- */
+
+        /* PERUBAHAN KUNCI: Nilai 'to' diubah agar posisi akhir lebih ke tengah */
+        @keyframes reveal-page-top-left { from { top: 50vh; left: 50vw; opacity: 0; } to { top: 15vh; left: 25vw; opacity: 1; } }
+        @keyframes reveal-page-top-right { from { top: 50vh; right: 50vw; opacity: 0; } to { top: 15vh; right: 25vw; opacity: 1; } }
+        @keyframes reveal-page-bottom-left { from { bottom: 50vh; left: 50vw; opacity: 0; } to { bottom: 15vh; left: 25vw; opacity: 1; } }
+        @keyframes reveal-page-bottom-right { from { bottom: 50vh; right: 50vw; opacity: 0; } to { bottom: 15vh; right: 25vw; opacity: 1; } }
+        @keyframes fade-in-content { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        
+        .page-header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            pointer-events: none;
+        }
+        
+        .page-header::before, .page-header::after,
+        .page-footer::before, .page-footer::after {
+            content: ''; position: absolute; width: 25px; height: 25px;
+            border-color: var(--accent-color); border-style: solid;
+            animation-fill-mode: forwards; animation-duration: 0.8s;
+            animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* PERUBAHAN KUNCI: Posisi akhir diubah agar cocok dengan keyframes */
+        .page-header::before { top: 20vh; left: 30vw; border-width: 2px 0 0 2px; animation-name: reveal-page-top-left; }
+        .page-header::after { top: 20vh; right: 30vw; border-width: 2px 2px 0 0; animation-name: reveal-page-top-right; }
+        
+        .page-footer::before { bottom: 20vh; left: 30vw; border-width: 0 0 2px 2px; animation-name: reveal-page-bottom-left; }
+        .page-footer::after { bottom: 20vh; right: 30vw; border-width: 0 2px 2px 0; animation-name: reveal-page-bottom-right; }
+        
+        .login-box h2, .login-box form {
+            opacity: 0; animation: fade-in-content 1s forwards; animation-delay: 0.4s;
+        }
+        
+        .login-box h2 {
+            font-family: var(--font-secondary); font-size: 1.75rem; font-weight: 700;
+            letter-spacing: 4px; text-transform: uppercase;
+            padding: 10px 15px; display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .form-control.custom-input {
+            background: transparent; border: none; border-bottom: 1px solid var(--border-color);
+            border-radius: 0; color: var(--text-color); font-family: var(--font-secondary);
+            padding: 0.75rem 0; font-size: 1rem; margin-bottom: 1.5rem; text-align: center;
+            transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .form-control.custom-input:focus {
+            background: transparent; color: var(--text-color);
+            border-color: var(--accent-color); box-shadow: 0 4px 15px -5px var(--accent-color);
+        }
+        .form-control.custom-input::placeholder { color: var(--text-muted-color); font-family: var(--font-primary); text-align: center; }
+
+        .btn-custom-login {
+            font-family: var(--font-secondary); text-transform: uppercase; letter-spacing: 1.5px;
+            background-color: transparent; color: var(--accent-color);
+            border: 1px solid var(--accent-color); padding: 0.75rem 1.5rem; border-radius: 0;
+            transition: background-color 0.3s, color 0.3s; margin-top: 2rem;
+        }
+        .btn-custom-login:hover { background-color: var(--accent-color); color: var(--background-color); box-shadow: 0 0 15px var(--accent-color); }
+
+        .page-footer {
+            position: fixed; bottom: 0; left: 0; width: 100%; padding: 1.5rem;
+            display: flex; justify-content: space-between; align-items: center;
+            font-family: var(--font-secondary); font-size: 0.9rem; color: var(--text-muted-color);
+        }
+
+        .page-footer a { color: var(--text-muted-color); text-decoration: none; border-bottom: 1px dotted var(--border-color); transition: color 0.3s; }
+        .page-footer a:hover { color: var(--accent-color); border-bottom-color: var(--accent-color); }

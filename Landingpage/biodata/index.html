@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodata</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --font-primary: "Brut Grotesque Boook", sans-serif;
+            --font-secondary: 'Hmalphamono', 'Roboto Mono', monospace;
+            --accent-color: #00bbff;
+            --background-color: #000000;
+            --text-color: #ffffff;
+            --border-color: rgba(255, 255, 255, 0.2);
+            --text-muted-color: rgba(255, 255, 255, 0.6);
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 6rem auto;
+            padding: 2rem;
+            opacity: 0;
+            animation: fade-in-content 1s forwards .5s;
+        }
+
+        .main-title {
+            font-family: var(--font-secondary);
+            font-size: 2.5rem;
+            text-align: center;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            margin-bottom: 4rem;
+        }
+
+        .bio-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-picture-placeholder {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border: 2px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-secondary);
+            color: var(--text-muted-color);
+            position: relative;
+        }
+        /* HUD kecil di sekeliling foto profil */
+        .profile-picture-placeholder::before, .profile-picture-placeholder::after {
+            content: ''; position: absolute; width: 25px; height: 25px;
+            border-color: var(--accent-color); border-style: solid;
+        }
+        .profile-picture-placeholder::before { top: -2px; left: -2px; border-width: 2px 0 0 2px; }
+        .profile-picture-placeholder::after { bottom: -2px; right: -2px; border-width: 0 2px 2px 0; }
+
+        .bio-details h2 {
+            font-family: var(--font-secondary);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .bio-details h3 {
+            font-family: var(--font-secondary);
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+        }
+        
+        .bio-data-list {
+            margin-bottom: 2rem;
+        }
+
+        .bio-data-list .data-item {
+            display: flex;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+        .bio-data-list .data-label {
+            width: 120px;
+            color: var(--text-muted-color);
+            flex-shrink: 0;
+        }
+        .bio-data-list .data-value {
+            font-family: var(--font-secondary);
+        }
+
+        .bio-description {
+            color: var(--text-muted-color);
+            line-height: 1.6;
+        }
+
+        /* --- HUD NAVIGATION --- */
+        .page-header, .page-footer {
+            position: fixed; width: 100%; padding: 1.5rem;
+            display: flex; justify-content: space-between; align-items: center;
+            pointer-events: none;
+        }
+        .page-header { top: 0; left: 0; }
+        .page-footer { bottom: 0; left: 0; }
+        .hud-nav-link {
+            font-family: var(--font-secondary); font-size: 1rem; color: var(--text-muted-color);
+            text-decoration: none; text-transform: uppercase; letter-spacing: 2px;
+            padding: 10px; position: relative; transition: color 0.3s;
+            pointer-events: all; opacity: 0;
+            animation: fade-in-content 1s forwards .2s;
+        }
+        .hud-nav-link:hover { color: var(--accent-color); }
+        .hud-nav-link::before {
+            content: ''; position: absolute; width: 20px; height: 20px;
+            border-color: var(--accent-color); border-style: solid;
+            transition: transform 0.3s ease;
+        }
+        .hud-nav-link.top-left::before { top: 0; left: 0; border-width: 2px 0 0 2px; }
+        .hud-nav-link.top-right::before { top: 0; right: 0; border-width: 2px 2px 0 0; }
+        .hud-nav-link.bottom-left::before { bottom: 0; left: 0; border-width: 0 0 2px 2px; }
+        .hud-nav-link.bottom-right::before { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
+        .hud-nav-link:hover::before { transform: scale(1.2); }
+        
+        @keyframes fade-in-content { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Responsif untuk layar kecil */
+        @media (max-width: 768px) {
+            .bio-container {
+                grid-template-columns: 1fr; /* Kolom jadi 1 di mobile */
+            }
+            .main-container {
+                margin: 4rem auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="page-header">
+        <a href="index.html" class="hud-nav-link top-left">[ Home ]</a>
+        <a href="table.html" class="hud-nav-link top-right">[ Schedule ]</a>
+    </header>
+
+    <main class="main-container">
+        <h1 class="main-title">[ Personal Data File ]</h1>
+
+        <div class="bio-container">
+            <div class="profile-picture-container">
+                <div class="profile-picture-placeholder">
+                    <span>PHOTO</span>
+                </div>
+            </div>
+
+            <div class="bio-details">
+                <h2>[ Timothy Jordy ,Weley]</h2>
+                <h3>[ UNKLAB / Computer Science ]</h3>
+
+                <div class="bio-data-list">
+                    <div class="data-item">
+                        <span class="data-label">NIM</span>
+                        <span class="data-value">[ 105022410005 ]</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">JURUSAN</span>
+                        <span class="data-value">[ Informatics ]</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">DOMISILI</span>
+                        <span class="data-value">[ Manado, Indonesia ]</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">EMAIL</span>
+                        <span class="data-value">[ tmthyjw@gmail.com ]</span>
+                    </div>
+                </div>
+
+                <p class="bio-description">
+                    [ Tulis paragraf singkat tentang diri Anda, minat, atau tujuan karir Anda di sini. Jelaskan apa yang membuat Anda unik dan apa yang sedang Anda pelajari atau kerjakan saat ini. ]
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <a href="#about" class="hud-nav-link bottom-left">[ About ]</a>
+        <a href="#contact" class="hud-nav-link bottom-right">[ Contact ]</a>
+    </footer>
+
+</body>
+</html>

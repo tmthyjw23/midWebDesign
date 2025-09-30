@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --font-primary: "Brut Grotesque Boook", sans-serif;
+            --font-secondary: 'Hmalphamono', 'Roboto Mono', monospace;
+            --accent-color: #00bbff;
+            --background-color: #000000;
+            --text-color: #ffffff;
+            --border-color: rgba(255, 255, 255, 0.4);
+            --text-muted-color: rgba(255, 255, 255, 0.5);
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            /* Efek background grid halus */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* --- HERO SECTION (KONTEN UTAMA) --- */
+        .hero-section {
+            text-align: center;
+            max-width: 700px;
+            opacity: 0;
+            animation: fade-in-content 1s forwards;
+            animation-delay: 0.5s;
+        }
+
+        .hero-section h1 {
+            font-family: var(--font-secondary);
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        .hero-section p {
+            font-size: 1.1rem;
+            color: var(--text-muted-color);
+            max-width: 500px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .btn-custom {
+            font-family: var(--font-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            padding: 0.8rem 2rem;
+            border-radius: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .btn-custom:hover {
+            background-color: var(--accent-color);
+            color: var(--background-color);
+            box-shadow: 0 0 15px var(--accent-color);
+        }
+
+        /* --- HUD NAVIGATION --- */
+        .page-header, .page-footer {
+            position: fixed;
+            width: 100%;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            pointer-events: none; /* Pointer events dinonaktifkan di container */
+        }
+        .page-header { top: 0; left: 0; }
+        .page-footer { bottom: 0; left: 0; }
+        
+        .hud-nav-link {
+            font-family: var(--font-secondary);
+            font-size: 1rem;
+            color: var(--text-muted-color);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 10px;
+            position: relative;
+            transition: color 0.3s;
+            pointer-events: all; /* Pointer events diaktifkan kembali di link */
+            opacity: 0;
+            animation: fade-in-content 1s forwards;
+            animation-delay: 0.2s;
+        }
+        .hud-nav-link:hover {
+            color: var(--accent-color);
+        }
+
+        /* Membuat bingkai HUD di setiap link navigasi */
+        .hud-nav-link::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-color: var(--accent-color);
+            border-style: solid;
+            transition: transform 0.3s ease;
+        }
+
+        .hud-nav-link.top-left::before { top: 0; left: 0; border-width: 2px 0 0 2px; }
+        .hud-nav-link.top-right::before { top: 0; right: 0; border-width: 2px 2px 0 0; }
+        .hud-nav-link.bottom-left::before { bottom: 0; left: 0; border-width: 0 0 2px 2px; }
+        .hud-nav-link.bottom-right::before { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
+        
+        .hud-nav-link:hover::before {
+            transform: scale(1.2); /* Efek zoom saat hover */
+        }
+        
+        @keyframes fade-in-content { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+    
+    <header class="page-header">
+        <a href="table/index.html" class="hud-nav-link top-left">[ Schedule ]</a>
+        <a href="/skill" class="hud-nav-link top-right">[ Skill ]</a>
+    </header>
+
+    <main class="hero-section">
+        <h1 id="welcome-heading">Hallo,</h1>
+        <p>Welcome to tmthy's Web Design projects.This project was created to fulfill the requirements of the Mid-term Web Design Course by Sir Regi Najoan.</p>
+        <a href="biodata/index.html" class="btn-custom">[ Bio ]</a>
+    </main>
+
+    <footer class="page-footer">
+        <a href="#about" class="hud-nav-link bottom-left">[ About ]</a>
+        <a href="#contact" class="hud-nav-link bottom-right">[ Contact ]</a>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
